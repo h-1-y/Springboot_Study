@@ -7,3 +7,6 @@ Frist springboot study
 # 2024. 03. 20
 - 프로젝트 환경 셋팅
 - JUnit Test
+
+# 2024. 03. 21
+- JPA 입문 및 엔티티 설계
