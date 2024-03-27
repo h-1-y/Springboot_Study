@@ -10,8 +10,7 @@ import jpabook.jpashop.domain.Member;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-// final 이 있는 필드에 한해서 생성자를 만들어줌!!!
-@RequiredArgsConstructor
+@RequiredArgsConstructor // final 이 있는 필드에 한해서 생성자를 만들어줌!!!
 public class MemberRepository {
 
 //	@PersistenceContext
