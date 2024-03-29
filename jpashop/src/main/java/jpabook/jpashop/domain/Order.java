@@ -17,15 +17,22 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
+//@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Order {
 
+	// @NoArgsConstructor(access = AccessLevel.PROTECTED) <- 이게 에러 나서 일단 프로텍티드 생성자 생성
+	// 다른곳에서 생성하는 것을 막기 위함 
+	protected Order() {}
+	
 	@Id
 	@GeneratedValue
 	@Column(name = "order_id")
