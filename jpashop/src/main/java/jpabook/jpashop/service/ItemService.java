@@ -30,7 +30,9 @@ public class ItemService {
 		
 		Item findItem = itemRepository.findOne(itemId);
 		
-		findItem.updateItem(param);
+		findItem.setName(param.getName());
+		findItem.setPrice(param.getPrice());
+		findItem.setStockQuantity(param.getStockQuantity());
 		
 		return findItem;
 		

@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.ManyToMany;
-import jpabook.jpashop.controller.BookForm;
 import jpabook.jpashop.domain.Category;
 import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
@@ -55,17 +54,6 @@ public abstract class Item {
 		if ( restStock < 0 ) throw new NotEnoughStockException("need more stock");
 		
 		this.stockQuantity = restStock;
-		
-	}
-	
-	public void updateItem(BookForm item) {
-		
-		this.name = item.getName();
-		this.price = item.getPrice();
-		this.stockQuantity = item.getStockQuantity();
-		
-		
-//		new Book(item.getAuthor(), item.getIsbn()); // 뭐지.... 고민해보자 
 		
 	}
 	

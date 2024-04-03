@@ -82,14 +82,14 @@ public class ItemController {
 	@PostMapping("/items/{itemId}/edit")
 	public String updateItem(@PathVariable("itemId") Long itemId, @ModelAttribute("form") BookForm form) {
 		
-		Book book = new Book();
-		
-		book.setId(form.getId());
-		book.setName(form.getName());
-		book.setPrice(form.getPrice());
-		book.setStockQuantity(form.getStockQuantity());
-		book.setAuthor(form.getAuthor());
-		book.setIsbn(form.getIsbn());
+//		Book book = new Book();
+//		
+//		book.setId(form.getId());
+//		book.setName(form.getName());
+//		book.setPrice(form.getPrice());
+//		book.setStockQuantity(form.getStockQuantity());
+//		book.setAuthor(form.getAuthor());
+//		book.setIsbn(form.getIsbn());
 		
 		// merge 방식은 최대한 지양하고 수정시엔 번거롭더라도 변경감지 방식을 사용하는 것을 추천  
 		

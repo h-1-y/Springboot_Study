@@ -34,7 +34,7 @@ public class OrderRepository {
 	// JPQL 동적 쿼리 방식... 미뛴...
 	public List<Order> findAllByString(OrderSearch orderSearch) {
 		
-		String jpql = "select o from Order o join o,member m";
+		String jpql = "select o from Order o join o.member m";
 		boolean isFirstCondition = true;
 		
 		// 주문 상태 검색

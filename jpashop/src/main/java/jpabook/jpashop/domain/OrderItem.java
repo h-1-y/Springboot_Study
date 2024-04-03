@@ -34,7 +34,7 @@ public class OrderItem {
 	@JoinColumn(name = "order_id")
 	private Order order;
 	
-	private int orderPirce;
+	private int orderPrice;
 	
 	private int count;
 
@@ -44,7 +44,7 @@ public class OrderItem {
 		OrderItem orderItem = new OrderItem();
 		
 		orderItem.setItem(item);
-		orderItem.setOrderPirce(orderPrice);
+		orderItem.setOrderPrice(orderPrice);
 		orderItem.setCount(count);
 		
 		item.removeStock(count);
@@ -60,8 +60,8 @@ public class OrderItem {
 	}
 
 	// 주문 상품 전체 가격 조회 로직 
-	public int getTotalPirce() {
-		return getOrderPirce() * getCount();
+	public int getTotalPrice() {
+		return getOrderPrice() * getCount();
 	}
 	
 }
