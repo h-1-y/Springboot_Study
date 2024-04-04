@@ -51,13 +51,10 @@ public class OrderController {
 		
 	}
 	
-	
 	@GetMapping("/orders")
 	public String orderList(@ModelAttribute("orderSearch") OrderSearch orderSearch, Model model) {
 
 		List<Order> orders = orderService.findOrders(orderSearch);
-		
-		System.out.println("HaHahhahHAHAHAhAhAHah");
 		
 		model.addAttribute("orders", orders);
 		
