@@ -46,3 +46,6 @@ Frist springboot study
 
 # 2024. 04. 04
 - 회원 API 개발 시작단계
+
+# 2024. 04. 05
+- 회원 수정 API 추가
