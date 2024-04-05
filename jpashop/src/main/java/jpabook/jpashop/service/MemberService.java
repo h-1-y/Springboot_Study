@@ -62,4 +62,10 @@ public class MemberService {
 		
 	}
 	
+	@Transactional
+	public void update(long id, String name) {
+		Member member = memberRepository.findOne(id);
+		member.setName(name);
+	}
+	
 }
