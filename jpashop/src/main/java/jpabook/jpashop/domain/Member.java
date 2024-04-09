@@ -31,7 +31,7 @@ public class Member {
 	@Embedded
 	private Address address;
 	
-	@JsonIgnore // <- @JsonIgnore 어노테이션 추가 시 JSON 데이터에서 제외 
+//	@JsonIgnore // <- @JsonIgnore 어노테이션 추가 시 JSON 데이터에서 제외 
 	@OneToMany(mappedBy = "member") // 일대다 관계 맵핑 
 	private List<Order> orders = new ArrayList<>();
 	
