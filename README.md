@@ -55,3 +55,6 @@ Frist springboot study
 
 # 2024. 04. 08
 - 조회용 샘플 데이터 입력 추가
+
+# 2024. 04. 10
+- hibernate5JakartModule 라이브러리 추가
