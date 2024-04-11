@@ -58,3 +58,6 @@ Frist springboot study
 
 # 2024. 04. 10
 - hibernate5JakartModule 라이브러리 추가
+
+# 2024. 04 .11
+- Lazy 강제 초기화 방법
