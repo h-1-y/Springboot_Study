@@ -1,14 +1,21 @@
 package jpabook.jpashop.api;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * xToOne ( ManyToOne, OneToOne ) 관계에서 성능 최적화를 어떻게 할것 인가... 
@@ -43,6 +50,41 @@ public class OrderSimpleApiController {
 		}
 		
 		return all;
+		
+	}
+	
+	// entity 노출이 아닌 DTO 노출 방식 
+	@GetMapping("/api/v2/simple-orders")
+	public List<SimpleOrderDto> ordersV2() {
+		
+		List<Order> orders = orderRepository.findAllByString(new OrderSearch());
+		
+		List<SimpleOrderDto> result = orders.stream()
+									  .map(order -> new SimpleOrderDto(order))
+									  .collect(Collectors.toList());
+		
+		return result;
+		
+	}
+	
+	@Data
+	static class SimpleOrderDto {
+		
+		private Long orderId;
+		private String name;
+		private LocalDateTime orderDate;
+		private OrderStatus orderStatus;
+		private Address address;
+		
+		public SimpleOrderDto(Order order) {
+			
+			this.orderId = order.getId();
+			this.name = order.getMember().getName();
+			this.orderDate = order.getOrderDate();
+			this.orderStatus = order.getStatus();
+			this.address = order.getDelivery().getAddress();
+			
+		}
 		
 	}
 	
