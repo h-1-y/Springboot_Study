@@ -53,7 +53,7 @@ public class OrderSimpleApiController {
 		
 	}
 	
-	// entity 노출이 아닌 DTO 노출 방식 
+	// entity 노출이 아닌 entity를 DTO로 변환하여 노출 방식 
 	@GetMapping("/api/v2/simple-orders")
 	public List<SimpleOrderDto> ordersV2() {
 		
@@ -62,6 +62,20 @@ public class OrderSimpleApiController {
 		List<SimpleOrderDto> result = orders.stream()
 									  .map(order -> new SimpleOrderDto(order))
 									  .collect(Collectors.toList());
+		
+		return result;
+		
+	}
+	
+	// 패치조인 !! fetch join
+	@GetMapping("/api/v3/simple-orders")
+	public List<SimpleOrderDto> ordersV3() {
+		
+		List<Order> orders = orderRepository.findAllWithMemberDelivery();
+		
+		List<SimpleOrderDto> result = orders.stream()
+				  .map(order -> new SimpleOrderDto(order))
+				  .collect(Collectors.toList());
 		
 		return result;
 		
