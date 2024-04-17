@@ -65,3 +65,6 @@ Frist springboot study
 # 2024. 04. 16
 - API 조회 DTO 변환 후 반환
 - Fatch join 사용
+
+# 2024. 04. 17
+- API 조회 JPA를 통해 DTO 바로 변환
