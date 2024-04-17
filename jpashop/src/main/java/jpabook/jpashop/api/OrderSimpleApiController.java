@@ -12,6 +12,7 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.OrderSimpleQueryDto;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -78,6 +79,14 @@ public class OrderSimpleApiController {
 				  .collect(Collectors.toList());
 		
 		return result;
+		
+	}
+	
+	// JPA를 통해 바로 DTO로 변환 
+	@GetMapping("/api/v4/simple-orders")
+	public List<OrderSimpleQueryDto> ordersV4() {
+		
+		return orderRepository.findOrderDto();
 		
 	}
 	

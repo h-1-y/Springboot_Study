@@ -141,5 +141,21 @@ public class OrderRepository {
 		
 		return orders;
 	}
+
+	//JPA를 통해 바로 DTO로 변환 
+	public List<OrderSimpleQueryDto> findOrderDto() {
+		
+		List<OrderSimpleQueryDto> orders = 
+				em.createQuery(
+								"select " +
+								"new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address) " +
+								"from Order o " +
+								"join o.member m " +
+								"join o.delivery d", OrderSimpleQueryDto.class
+							  ).getResultList();
+		
+		return orders;
+		
+	}
 	
 }
