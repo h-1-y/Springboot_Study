@@ -61,3 +61,7 @@ Frist springboot study
 
 # 2024. 04 .11
 - Lazy 강제 초기화 방법
+
+# 2024. 04. 16
+- API 조회 DTO 변환 후 반환
+- Fatch join 사용
