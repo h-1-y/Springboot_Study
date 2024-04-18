@@ -1,4 +1,4 @@
-package jpabook.jpashop.repository;
+package jpabook.jpashop.repository.order.simplerepository;
 
 import java.time.LocalDateTime;
 

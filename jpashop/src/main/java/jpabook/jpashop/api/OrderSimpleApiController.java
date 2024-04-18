@@ -12,7 +12,8 @@ import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
-import jpabook.jpashop.repository.OrderSimpleQueryDto;
+import jpabook.jpashop.repository.order.simplerepository.OrderSimpleQueryDto;
+import jpabook.jpashop.repository.order.simplerepository.OrderSimpleQueryRepository;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class OrderSimpleApiController {
 
 	private final OrderRepository orderRepository;
+	private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 	
 	// entity 직접 노출 
 	// entity 직접 노출 하면 무슨 문제가 있는지 체험
@@ -86,7 +88,7 @@ public class OrderSimpleApiController {
 	@GetMapping("/api/v4/simple-orders")
 	public List<OrderSimpleQueryDto> ordersV4() {
 		
-		return orderRepository.findOrderDto();
+		return orderSimpleQueryRepository.findOrderDto();
 		
 	}
 	
