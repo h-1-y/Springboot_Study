@@ -68,3 +68,6 @@ Frist springboot study
 
 # 2024. 04. 17
 - API 조회 JPA를 통해 DTO 바로 변환
+
+# 2024. 04. 19
+- API 컬렉션 조회 ver1 엔티티 직접 노출
