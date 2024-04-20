@@ -71,3 +71,6 @@ Frist springboot study
 
 # 2024. 04. 19
 - API 컬렉션 조회 ver1 엔티티 직접 노출
+
+# 2024. 04. 20
+- API 컬렉션 조회 entity를 DTO로 변환 ver2
