@@ -74,3 +74,6 @@ Frist springboot study
 
 # 2024. 04. 20
 - API 컬렉션 조회 entity를 DTO로 변환 ver2
+
+# 2024. 04. 21
+- API 컬랙션 조회 entity를 DTO로 변환 - 패치조인 ver3
