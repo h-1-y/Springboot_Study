@@ -80,3 +80,6 @@ Frist springboot study
 
 # 2024. 04. 22
 - API 컬랙션 조회 fetch join 페이징 한계 돌파 part1
+
+# 2024. 04. 24
+- yml default_batch_fetch_size 적용
