@@ -164,7 +164,6 @@ public class OrderRepository {
 //												" leff join fetch o.delivery d", Order.class
 											).setFirstResult(offset).setMaxResults(limit).getResultList();
 		
-		
 		return orders;
 	}
 
