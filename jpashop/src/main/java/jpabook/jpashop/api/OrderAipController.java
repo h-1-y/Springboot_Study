@@ -1,7 +1,12 @@
 package jpabook.jpashop.api;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +19,8 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.query.OrderFlatDto;
+import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.Getter;
@@ -92,6 +99,55 @@ public class OrderAipController {
 		
 		return orderQueryRepository.findOrderQueryDtos();
 		
+	}
+	
+	@GetMapping("/api/v5/orders")
+	public List<OrderQueryDto> ordersV5() {
+		
+		return orderQueryRepository.findAllByDto_Optimization();
+		
+	}
+	
+	@GetMapping("/api/v6/orders")
+	public List<OrderQueryDto> ordersV6() {
+		
+		List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();
+		
+		List<OrderQueryDto> result = flats.stream()
+				.filter(distinctByKey(o -> o.getOrderId()))
+				.map(o -> new OrderQueryDto(o.getOrderId(), o.getName(), o.getOrderDate(), o.getOrderStatus(), o.getAddress()))
+				.collect(Collectors.toList());
+		
+		List<OrderItemQueryDto> orderItems = flats.stream()
+				.map(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getOrderPrice())).collect(Collectors.toList());
+		
+		Map<Long, List<OrderItemQueryDto>> orderItemMap = orderItems.stream()
+				.collect(Collectors.groupingBy(OrderItemQueryDto -> OrderItemQueryDto.getOrderId()));
+		
+		result.forEach(o -> o.setOrderItems(orderItemMap.get(o.getOrderId())));
+		
+//		List<OrderQueryDto> result = flats.stream()
+//	            .collect(Collectors.groupingBy(o -> new OrderQueryDto(o.getOrderId(), o.getName(), o.getOrderDate(), o.getOrderStatus(), o.getAddress()),
+//	            		Collectors.mapping(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()), Collectors.toList())))
+//	            .entrySet()
+//	            .stream()
+//	            .map(e -> new OrderQueryDto(e.getKey().getOrderId(), e.getKey().getName(), e.getKey().getOrderDate(), e.getKey().getOrderStatus(), e.getKey().getAddress(), e.getValue()))
+//	            .collect(Collectors.toList());
+		
+		 return result;
+		 
+	}
+	
+	/**
+	 * 특정 키로 중복제거
+	 *
+	 * @param keyExtractor
+	 * @param <T>
+	 * @return
+	 */
+	private static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor) {
+		Map<Object, Boolean> map = new HashMap<>();
+		return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
 	}
 	
 	@Getter

@@ -62,12 +62,17 @@ public class InitDb {
 			
 			em.persist(book2);
 			
+			Book book3 = createBook("JPA3 BOOK", 30000, 300);
+			
+			em.persist(book3);
+			
 			OrderItem orderItem1 = OrderItem.createOrderItem(book1, book1.getPrice(), 1);
 			OrderItem orderItem2 = OrderItem.createOrderItem(book2, book2.getPrice(), 2);
+			OrderItem orderItem3 = OrderItem.createOrderItem(book3, book3.getPrice(), 3);
 			
 			Delivery delivery = createDelivery(member.getAddress());
 			
-			Order order = Order.createOrder(member, delivery, orderItem1, orderItem2);
+			Order order = Order.createOrder(member, delivery, orderItem1, orderItem2, orderItem3);
 			
 			em.persist(order);
 			
