@@ -87,3 +87,6 @@ Frist springboot study
 # 2024. 04. 29
 - API 컬렉션 조회 V6 - JPA -> DTO 직접 조회 및 데이터 최적화
 - H2 -> ORACLE 변경
+
+#2024. 04. 30
+- Open Session In View OSIV 사용 예제
