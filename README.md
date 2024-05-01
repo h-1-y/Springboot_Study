@@ -90,3 +90,6 @@ Frist springboot study
 
 #2024. 04. 30
 - Open Session In View OSIV 사용 예제
+
+#2024 05. 01
+- Spring Data JPA 체험
