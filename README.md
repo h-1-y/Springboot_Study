@@ -93,3 +93,6 @@ Frist springboot study
 
 #2024 05. 01
 - Spring Data JPA 체험
+
+#2024. 05. 02
+- QueryDSL 환경설정 추가
