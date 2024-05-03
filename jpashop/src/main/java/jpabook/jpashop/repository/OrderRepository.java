@@ -6,6 +6,9 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
+import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.impl.JPAQueryFactory;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
@@ -15,13 +18,24 @@ import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderStatus;
+import jpabook.jpashop.domain.QMember;
+import jpabook.jpashop.domain.QOrder;
 import lombok.RequiredArgsConstructor;
 
 @Repository
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class OrderRepository {
 
 	private final EntityManager em;
+	private final JPAQueryFactory query;
+	
+	public OrderRepository(EntityManager em) {
+		
+		this.em = em;
+		this.query = new JPAQueryFactory(em);
+		
+	}
 	
 	public void save(Order order) {
 		em.persist(order);
@@ -112,11 +126,34 @@ public class OrderRepository {
 		
 	}
 	
-//	public List<Order> findAll(OrderSearch orderSearch) {
-//		
-//		
-//		
-//	}
+	public List<Order> findAllQuerydsl(OrderSearch orderSearch) {
+		
+		return query
+			.select(QOrder.order)
+			.from(QOrder.order)
+			.join(QOrder.order.member, QMember.member)
+//			.where(order.status.eq(orderSearch.getOrderStatus())) 정적 
+			.where(statusEq(orderSearch.getOrderStatus()), nameLike(orderSearch.getMemberName())) // 동적 
+			.limit(1000)
+			.fetch();
+		
+	}
+	
+	private BooleanExpression nameLike(String memberName) {
+		
+		if ( !StringUtils.hasText(memberName) ) return null;
+		
+		return QMember.member.name.contains(memberName);
+		
+	}
+	
+	private BooleanExpression statusEq(OrderStatus status) {
+		
+		if ( status == null ) return null;
+		
+		return QOrder.order.status.eq(status);
+		
+	}
 	
 	// 정적 쿼리... jpa 
 	public List<Order> findAll(OrderSearch orderSearch) {
