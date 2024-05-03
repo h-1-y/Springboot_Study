@@ -96,3 +96,6 @@ Frist springboot study
 
 #2024. 05. 02
 - QueryDSL 환경설정 추가
+
+# 2024. 05. 03
+- Querydsl 샘플 적용
